@@ -759,6 +759,8 @@ Proof.
   simpl in *. subst T. traceEq.
 Qed.
 
+Set Lax CoInductive Match.
+
 Lemma tsilent_forever_silent:
   forall S,
   tsilent S -> forever_silent step ge (state_of_tstate S).
@@ -774,6 +776,8 @@ Proof.
   apply COINDHYP.
   red; intros. eapply H. eapply tsteps_left; eauto. eauto.
 Qed.
+
+Unset Lax CoInductive Match.
 
 Lemma treactive_forever_reactive:
   forall S,

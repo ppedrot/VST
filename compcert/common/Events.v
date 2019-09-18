@@ -144,12 +144,16 @@ CoInductive traceinf_sim: traceinf -> traceinf -> Prop :=
       traceinf_sim T1 T2 ->
       traceinf_sim (Econsinf e T1) (Econsinf e T2).
 
+Set Lax CoInductive Match.
+
 Lemma traceinf_sim_refl:
   forall T, traceinf_sim T T.
 Proof.
   cofix COINDHYP; intros.
   destruct T. constructor. apply COINDHYP.
 Qed.
+
+Unset Lax CoInductive Match.
 
 Lemma traceinf_sim_sym:
   forall T1 T2, traceinf_sim T1 T2 -> traceinf_sim T2 T1.
@@ -207,6 +211,8 @@ CoFixpoint traceinf_of_traceinf' (T': traceinf') : traceinf :=
       Econsinf e (traceinf_of_traceinf' tl)
   end.
 
+Set Lax CoInductive Match.
+
 Remark unroll_traceinf':
   forall T, T = match T with Econsinf' t T' NE => Econsinf' t T' NE end.
 Proof.
@@ -218,6 +224,8 @@ Remark unroll_traceinf:
 Proof.
   intros. destruct T; auto.
 Qed.
+
+Unset Lax CoInductive Match.
 
 Lemma traceinf_traceinf'_app:
   forall t T NE,
